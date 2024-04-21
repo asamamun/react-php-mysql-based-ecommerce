@@ -6,9 +6,11 @@ import {Registration} from './components/Registration';
 import Login  from './components/Login';
 import {Products} from './components/Products';
 import {Cart} from './components/Cart';
+import { AuthProvider, AuthContext } from './AuthContext';
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -68,6 +70,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </AuthProvider>
   );
 }
 

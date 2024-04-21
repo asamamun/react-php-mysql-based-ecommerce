@@ -1,15 +1,17 @@
 // Login.js
-import React, { useState } from 'react';
-
+import React, { useState, useContext } from 'react';
+import { AuthContext } from './../AuthContext';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit =async  (e) => {
     // Handle login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
+/*     console.log('Email:', email);
+    console.log('Password:', password); */
+    e.preventDefault();
+    await login(email, password);
   };
 
   return (
