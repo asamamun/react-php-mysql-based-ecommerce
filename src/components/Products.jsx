@@ -2,12 +2,14 @@ import React, { useEffect, useState,useContext } from 'react';
 import { AuthContext } from './../AuthContext';
 import { Link } from 'react-router-dom';
 import './../App.css';
+import { useCart } from './../CartContext';
 
 export const Products = () => {
     const { authData } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -63,7 +65,7 @@ export const Products = () => {
                   <Link to={`/product/${product.id}`} className="btn btn-primary">
                     Details
                   </Link>
-                  <button className="btn btn-success">Add to Cart</button>
+                  <button onClick={() => addToCart(product)} className="btn btn-success">Add to Cart</button>
                 </div>
               </div>
             </div>
