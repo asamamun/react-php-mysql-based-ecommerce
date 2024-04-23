@@ -1,6 +1,7 @@
 // AuthContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_URL from './config';
 const AuthContext = createContext({
   authData:localStorage.getItem('authData') || {
     'status': null,
@@ -27,7 +28,7 @@ const AuthProvider = ({ value, children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost/ROUND57/reactJS/react-php-mysql-based-ecommerce/API/login.php', {
+      const response = await fetch(`${API_URL}login.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

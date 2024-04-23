@@ -3,6 +3,9 @@ import { AuthContext } from './../AuthContext';
 import { Link } from 'react-router-dom';
 import './../App.css';
 import { useCart } from './../CartContext';
+import Swal from 'sweetalert2'
+import axios from 'axios';
+import API_URL from './../config';
 
 export const Products = () => {
     const { authData } = useContext(AuthContext);
@@ -14,7 +17,7 @@ export const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost/ROUND57/reactJS/react-php-mysql-based-ecommerce/API/products.php');
+        const response = await fetch(`${API_URL}products.php`);
         const data = await response.json();
         setProducts(data);
 
@@ -33,11 +36,48 @@ export const Products = () => {
     setSelectedCategory(e.target.value);
   };
 
+  const deleteProduct = (productId) => {
+    try {
+      //
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          let response = await axios.post(`${API_URL}deleteproduct.php`, { id: productId });
+          console.log(response.data);
+          // After successful deletion, update the list of products
+          setProducts(products.filter(product => product.id !== productId));
+          Swal.fire({
+            title: "Deleted!",
+            text: response.data.message,
+            icon: "success"
+          });
+        }
+      });
+      //
+
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  };
+
   const filteredProducts = selectedCategory
     ? products.filter((product) => product.category_name === selectedCategory)
     : products;
     return authData.status && (
         <div className="container">
+          {authData.user.role == '2' && (
+            <Link className="btn btn-outline-info" to="/add">
+                                Add Product
+                            </Link>
+          )}
+          
       <h2 className="my-4">Products - {selectedCategory || 'All Categories'}</h2>
       <div className="mb-3">
         <label htmlFor="category-filter" className="form-label">
@@ -65,6 +105,9 @@ export const Products = () => {
                   <Link to={`/product/${product.id}`} className="btn btn-primary">
                     Details
                   </Link>
+                  {authData?.user.role === '2' && (
+                    <button onClick={() => deleteProduct(product.id)} className="btn btn-danger">Delete</button>
+                  )}
                   <button onClick={() => addToCart(product)} className="btn btn-success">Add to Cart</button>
                 </div>
               </div>

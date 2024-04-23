@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2024 at 12:55 PM
+-- Generation Time: Apr 23, 2024 at 01:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -221,8 +221,7 @@ INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `name`, `descript
 (70, 1, 2, 'man of steel', 'jiot', 'sup', '63ae7dada67be.png', 400000.00, 1, 30, '1', '2022-12-30 05:57:01'),
 (71, 2, 4, 'Samsung', 'ewsfa', 'rtfsf', '63ae7ddca3444.png', 200000.00, 1, 12, '0', '2022-12-30 05:57:48'),
 (72, 5, 5, 'The world Best Player Jersey', 'The world Best Player Jersey.Messi.', 'The world Best Player Jersey', '63ae7f5c97821.png', 1000.00, 1, 5, '1', '2022-12-30 06:04:12'),
-(73, 1, 9, 'Asus vivobook 15 ', 'Ryzen7. 5700u\r\nRam 8Gb,512 gb ssd', 'Ananta er personal Laptop', '63ae8b99e1e51.png', 82500.00, 1, 0, '1', '2022-12-30 06:56:25'),
-(74, 6, 11, 'deshi cow', 'some dewscription about deshi cow. ', 'deshicow001', '6551ef8e8fc20.png', 90000.00, 20, 0, '1', '2023-11-13 09:42:38');
+(73, 1, 9, 'Asus vivobook 15 ', 'Ryzen7. 5700u\r\nRam 8Gb,512 gb ssd', 'Ananta er personal Laptop', '63ae8b99e1e51.png', 82500.00, 1, 0, '1', '2022-12-30 06:56:25');
 
 -- --------------------------------------------------------
 
@@ -379,7 +378,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `subcategories`

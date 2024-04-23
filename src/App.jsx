@@ -9,6 +9,7 @@ import Login from './components/Login'; // Import the Login component
 import {Products} from './components/Products';
 import ProductDetails from './components/ProductDetails';
 import {Cart} from './components/Cart';
+import ProductAdd from './components/ProductAdd';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path="/registration" element={<Registration />} />
       <Route path="/login" element={<Login />} /> {/* Render the Login component at /login */}
       <Route path="/products" element={<Products />} />
+      <Route path="/add" element={<ProductAdd />} />
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/" element={<Home />} />

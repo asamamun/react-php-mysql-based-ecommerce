@@ -6,7 +6,7 @@ const ProviderWrapper = ({ children }) => {
   
   const navigate = useNavigate();
   const { authData, login, logout } = useContext(AuthContext);
-  console.log('ProviderWrapper loaded');
+  // console.log(JSON.parse(authData));
 
   const authProviderValue = {
     authData,
@@ -14,7 +14,7 @@ const ProviderWrapper = ({ children }) => {
     logout,
     navigate,
   };
-  console.log(authProviderValue);
+  // console.log(authProviderValue);
 
   return <AuthProvider value={authProviderValue}>{children}</AuthProvider>;
 };
