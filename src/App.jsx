@@ -10,6 +10,7 @@ import {Products} from './components/Products';
 import ProductDetails from './components/ProductDetails';
 import {Cart} from './components/Cart';
 import ProductAdd from './components/ProductAdd';
+import PlaceOrder from './components/PlaceOrder';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Route path="/login" element={<Login />} /> {/* Render the Login component at /login */}
       <Route path="/products" element={<Products />} />
       <Route path="/add" element={<ProductAdd />} />
+      <Route path="/placeorder" element={<PlaceOrder />} />
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/" element={<Home />} />
