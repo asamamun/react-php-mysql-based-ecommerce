@@ -1,4 +1,5 @@
 <?php
+
 require "database.php";
 
 // SQL query to fetch products with categories and subcategories
@@ -14,6 +15,7 @@ $products = array();
 // Fetch each product and store it in the array
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        $row['images'] = API.$row['images'];
         $products[] = $row;
     }
 }

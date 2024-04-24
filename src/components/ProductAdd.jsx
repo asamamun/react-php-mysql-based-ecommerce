@@ -50,13 +50,13 @@ const ProductAdd = () => {
 
   return (
 <div>
-      <div class="container">
-        <form class="needs-validation" onSubmit={handleSubmit} novalidate>
-          <div class="text-center">
-            <h2 class="font-weight-bold mt-3">Add Product</h2>
+      <div className="container">
+        <form className="needs-validation" onSubmit={handleSubmit} noValidate>
+          <div className="text-center">
+            <h2 className="font-weight-bold mt-3">Add Product</h2>
           </div>
-          <div class="form-group mb-2">
-            <select class="form-control" id="category_id" name="category_id" value={formData.id} onChange={handleChange} required>
+          <div className="form-group mb-2">
+            <select className="form-control" id="category_id" name="category_id" value={formData.id} onChange={handleChange} required>
               <option value="">Select Category</option>
               <option value="1">Electronics</option>
               <option value="2">Mobile</option>
@@ -65,11 +65,11 @@ const ProductAdd = () => {
               <option value="5">Sports</option>
               <option value="6">Cattle</option>
             </select>
-            <div class="invalid-feedback">Please select a category.</div>
+            <div className="invalid-feedback">Please select a category.</div>
           </div>
 
-          <div class="form-group mb-2">
-            <select class="form-control" id="subcategory_id" name="subcategory_id" value={formData.subcategory_id} onChange={handleChange} required>
+          <div className="form-group mb-2">
+            <select className="form-control" id="subcategory_id" name="subcategory_id" value={formData.subcategory_id} onChange={handleChange} required>
               <option value="">Select Subcategory</option>
               <option value="1">TV</option>
               <option value="2">AC</option>
@@ -83,50 +83,50 @@ const ProductAdd = () => {
               <option value="10">Mobile</option>
               <option value="11">Cow</option>
             </select>
-            <div class="invalid-feedback">Please select a subcategory.</div>
+            <div className="invalid-feedback">Please select a subcategory.</div>
           </div>
 
-          <div class="form-group mb-2">
-            <input type="text" class="form-control" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Name" required />
-            <div class="invalid-feedback">Please enter the product name.</div>
+          <div className="form-group mb-2">
+            <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Name" required />
+            <div className="invalid-feedback">Please enter the product name.</div>
           </div>
 
-          <div class="form-group mb-2">
-            <textarea class="form-control" id="description" name="description" value={formData.description} onChange={handleChange} placeholder="Description" required></textarea>
-            <div class="invalid-feedback">Please enter a product description.</div>
+          <div className="form-group mb-2">
+            <textarea className="form-control" id="description" name="description" value={formData.description} onChange={handleChange} placeholder="Description" required></textarea>
+            <div className="invalid-feedback">Please enter a product description.</div>
           </div>
 
-          <div class="form-group mb-2">
-            <input type="text" class="form-control" id="sku" name="sku" value={formData.sku} onChange={handleChange} placeholder="SKU" required />
-            <div class="invalid-feedback">Please enter the product SKU.</div>
+          <div className="form-group mb-2">
+            <input type="text" className="form-control" id="sku" name="sku" value={formData.sku} onChange={handleChange} placeholder="SKU" required />
+            <div className="invalid-feedback">Please enter the product SKU.</div>
           </div>
 
-          <div class="form-group mb-2">
-            <label for="images">Images:</label>
-            <input type="file" class="form-control-file" id="images" name="images" onChange={handleChange} required />
-            <div class="invalid-feedback">Please upload product images.</div>
+          <div className="form-group mb-2">
+            <label htmlFor="images">Images:</label>
+            <input type="file" className="form-control-file" id="images" name="images" onChange={handleChange} required />
+            <div className="invalid-feedback">Please upload product images.</div>
           </div>
 
-          <div class="form-group mb-2">
-            <input type="text" class="form-control" id="price" name="price" value={formData.price} onChange={handleChange} placeholder="Price" required />
-            <div class="invalid-feedback">Please enter the product price.</div>
+          <div className="form-group mb-2">
+            <input type="text" className="form-control" id="price" name="price" value={formData.price} onChange={handleChange} placeholder="Price" required />
+            <div className="invalid-feedback">Please enter the product price.</div>
           </div>
 
-          <div class="form-group mb-2">
-            <input type="text" class="form-control" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} placeholder="Quantity" required />
-            <div class="invalid-feedback">Please enter the product quantity.</div>
+          <div className="form-group mb-2">
+            <input type="text" className="form-control" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} placeholder="Quantity" required />
+            <div className="invalid-feedback">Please enter the product quantity.</div>
           </div>
 
-          <div class="form-group mb-2">
-            <input type="text" class="form-control" id="discount" name="discount" value={formData.discount} onChange={handleChange} placeholder="Discount" />
+          <div className="form-group mb-2">
+            <input type="text" className="form-control" id="discount" name="discount" value={formData.discount} onChange={handleChange} placeholder="Discount" />
           </div>
 
-          <div class="form-group mb-2">
-            <input type="text" class="form-control" id="hot" name="hot" value={formData.hot} onChange={handleChange} placeholder="Hot" />
+          <div className="form-group mb-2">
+            <input type="text" className="form-control" id="hot" name="hot" value={formData.hot} onChange={handleChange} placeholder="Hot" />
           </div>
 
-          <div class="mb-2">
-          <button type="submit" class="btn btn-primary">Add Product</button>
+          <div className="mb-2">
+          <button type="submit" className="btn btn-primary">Add Product</button>
           </div>
 
         </form>
