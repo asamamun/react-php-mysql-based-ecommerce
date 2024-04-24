@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { AuthWrapper } from './useAuth';
 import Navbar from './components/Navbar';
 import {Home} from './components/Home';
-import {Registration} from './components/Registration';
+import Registration from './components/Registration';
 import Login from './components/Login'; // Import the Login component
 import {Products} from './components/Products';
 import ProductDetails from './components/ProductDetails';
