@@ -21,15 +21,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Set parameter from the POST data
             $id = $_POST["id"];
-
+try {
+    if ($stmt->execute()) {
+        $response['status'] = true;
+        $response['message'] = "Product deleted successfully.";
+    } else {
+        $response['status'] = false;
+        $response['message'] = "Error deleting product: " . $stmt->error;
+    }
+} catch (\Throwable $th) {
+    $response['status'] = false;
+    $response['message'] = "Error deleting product: " . $th->getMessage();
+}
             // Execute SQL statement
-            if ($stmt->execute()) {
-                $response['status'] = true;
-                $response['message'] = "Product deleted successfully.";
-            } else {
-                $response['status'] = false;
-                $response['message'] = "Error deleting product: " . $stmt->error;
-            }
+            
 
             // Close statement and database connection
             $stmt->close();
