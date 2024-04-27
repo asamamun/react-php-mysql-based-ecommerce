@@ -1,22 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from './../config';
+import Swal from 'sweetalert2';
 
 const ProductAdd = () => {
+  const [categories, setCategories] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
   const [formData, setFormData] = useState({
     category_id: '',
     subcategory_id: '',
     name: '',
     description: '',
     sku: '',
-    images: null, // Store file object
+    images: null,
     price: '',
     quantity: '',
     discount: '',
     hot: '',
   });
 
+  useEffect(() => {
+    // Fetch categories
+    axios.get(`${API_URL}getCategories.php`)
+      .then(response => {
+        setCategories(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+      });
+  }, []);
+
+  const handleCategoryChange = (e) => {
+    const categoryId = e.target.value;
+    setFormData({ ...formData, category_id: categoryId });
+
+    // Fetch subcategories based on selected category
+    axios.get(`${API_URL}getSubcategories.php?category_id=${categoryId}`)
+      .then(response => {
+        setSubcategories(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching subcategories:', error);
+      });
+  };
+  const handleSubcategoryChange = (e) => {
+    const subcategoryId = e.target.value;
+    setFormData({ ...formData, subcategory_id: subcategoryId });
+  }
+
   const handleChange = (e) => {
-    // If the input is a file, use e.target.files[0] to get the file object
     const value = e.target.type === 'file' ? e.target.files[0] : e.target.value;
     setFormData({ ...formData, [e.target.name]: value });
   };
@@ -28,60 +60,81 @@ const ProductAdd = () => {
       formDataToSend.append(key, formData[key]);
     }
     try {
-      const response = await axios.post('http://localhost/ROUND57/reactJS/react-php-mysql-based-ecommerce/API/addproduct.php', formDataToSend);
+      const response = await axios.post(`${API_URL}addproduct.php`, formDataToSend);
       console.log('Product added:', response.data);
+      if (response.data.status) {
+        setFormData({
+          category_id: '',
+          subcategory_id: '',
+          name: '',
+          description: '',
+          sku: '',
+          images: null,
+          price: '',
+          quantity: '',
+          discount: '',
+          hot: '',
+        });
+        document.querySelector('input[type="file"]').value = '';        
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: response.data.message,
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: response.data.message,
+        });
+      }
+
       // Clear form data after successful submission
-      setFormData({
-        category_id: '',
-        subcategory_id: '',
-        name: '',
-        description: '',
-        sku: '',
-        images: null,
-        price: '',
-        quantity: '',
-        discount: '',
-        hot: '',
-      });
+
     } catch (error) {
       console.error('Error adding product:', error);
     }
   };
 
   return (
-<div>
+    <div>
       <div className="container">
         <form className="needs-validation" onSubmit={handleSubmit} noValidate>
+          {/* Other form fields */}
           <div className="text-center">
             <h2 className="font-weight-bold mt-3">Add Product</h2>
           </div>
+
           <div className="form-group mb-2">
-            <select className="form-control" id="category_id" name="category_id" value={formData.id} onChange={handleChange} required>
+            <select
+              className="form-control"
+              id="category_id"
+              name="category_id"
+              value={formData.category_id}
+              onChange={handleCategoryChange}
+              required
+            >
               <option value="">Select Category</option>
-              <option value="1">Electronics</option>
-              <option value="2">Mobile</option>
-              <option value="3">Men</option>
-              <option value="4">Women</option>
-              <option value="5">Sports</option>
-              <option value="6">Cattle</option>
+              {categories.map(category => (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              ))}
             </select>
             <div className="invalid-feedback">Please select a category.</div>
           </div>
 
           <div className="form-group mb-2">
-            <select className="form-control" id="subcategory_id" name="subcategory_id" value={formData.subcategory_id} onChange={handleChange} required>
+            <select
+              className="form-control"
+              id="subcategory_id"
+              name="subcategory_id"
+              value={formData.subcategory_id}
+              onChange={handleSubcategoryChange}
+              required
+            >
               <option value="">Select Subcategory</option>
-              <option value="1">TV</option>
-              <option value="2">AC</option>
-              <option value="3">Button Mobile</option>
-              <option value="4">Smart Mobile</option>
-              <option value="5">Sports</option>
-              <option value="6">Jersey</option>
-              <option value="7">Football</option>
-              <option value="8">Cricket</option>
-              <option value="9">Laptop</option>
-              <option value="10">Mobile</option>
-              <option value="11">Cow</option>
+              {subcategories.map(subcategory => (
+                <option key={subcategory.id} value={subcategory.id}>{subcategory.name}</option>
+              ))}
             </select>
             <div className="invalid-feedback">Please select a subcategory.</div>
           </div>
@@ -128,10 +181,8 @@ const ProductAdd = () => {
           <div className="mb-2">
           <button type="submit" className="btn btn-primary">Add Product</button>
           </div>
-
         </form>
       </div>
-
     </div>
   );
 };
