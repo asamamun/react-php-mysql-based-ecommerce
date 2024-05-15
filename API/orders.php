@@ -16,7 +16,7 @@ if ($order_data !== null) {
     $grandTotal = $order_data['grandTotal'];
 
     // Insert into orders table
-    $user_id = 1; // Assuming user_id is 1 for now
+    $user_id = $formData['user_id']; // Assuming user_id is 1 for now
     $discount = 0; // You can retrieve this value from the JSON if available
     $comment = ''; // You can retrieve this value from the JSON if available
     $payment = $formData['paymentMethod'];

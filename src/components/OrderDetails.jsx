@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import API_URL from './../config';
 
 export const OrderDetails = () => {
@@ -26,6 +28,15 @@ export const OrderDetails = () => {
 
   return (
     <div className="container">
+        <div className="mb-4">
+          <Link to="/orders" className="btn btn-outline-info ml-2">
+            <i className="fa fa-arrow-left"></i> Back
+          </Link>
+          <button className="btn btn-primary ml-2" onClick={() => window.print()}>
+            <i className="bi bi-printer ml-2"></i>
+        </button>
+        
+        </div>
       <div className="row">
         <div className="col-md-12">
           <div className="panel panel-default">

@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useCart } from './../CartContext';
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import API_URL from './../config';
+import { AuthContext } from './../AuthContext';
+    
+
 
 const PlaceOrder = () => {
+    const { authData } = useContext(AuthContext);
     const { cart, emptyCart } = useCart();
     const [formData, setFormData] = useState({
+        user_id: authData.user?.id,
         fullName: '',
         email: '',
         phoneNumber: '',
@@ -30,6 +35,7 @@ const PlaceOrder = () => {
 
         // Send the order data to your server endpoint
         try {
+            console.log(formData);
             const response = await axios.post(`${API_URL}orders.php`, {
                 cart: cart,
                 formData: formData,

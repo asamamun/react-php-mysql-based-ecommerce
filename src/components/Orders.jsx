@@ -55,7 +55,7 @@ export const Orders = () => {
   }, []);
 
   return (
-    <div>
+    <div className='container'>
       <Helmet>
         <title>Orders</title>
         <meta name="description" content="Orders with helmet" />
