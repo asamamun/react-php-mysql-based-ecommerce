@@ -8,8 +8,8 @@ const AuthContext = createContext({
     'message': null,
     'user': null,
   },
-  login: (email, password) => {login(email, password)}, // Modified login function
-  logout: () => {logout()},
+  login: () => {} , // Modified login function
+  logout: () => {},
 });
 
 const AuthProvider = ({ value, children }) => {

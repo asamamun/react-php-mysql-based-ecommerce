@@ -6,7 +6,7 @@ import { AuthContext } from '../AuthContext';
 
 const Navbar = ()=> {
     const { authData, logout } = useContext(AuthContext);
-
+console.log(authData);
     const handleLogout = () => {
         console.log('Logout clicked');
         logout();
@@ -49,6 +49,15 @@ const Navbar = ()=> {
                                         Cart
                                     </Link>
                                 </li>
+                                {
+                                    authData?.user?.role === '2' && (
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to="/orders">
+                                                Orders
+                                            </Link>
+                                        </li>
+                                    )
+                                }
                                 <li className="nav-item">
                                     <button className="btn btn-link nav-link" onClick={handleLogout}>
                                         Logout

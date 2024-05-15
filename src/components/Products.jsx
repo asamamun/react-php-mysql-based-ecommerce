@@ -52,9 +52,11 @@ export const Products = () => {
           let response = await axios.post(`${API_URL}deleteproduct.php`, { id: productId });
           console.log(response.data);
           // After successful deletion, update the list of products
+          if(response.data.status){
           setProducts(products.filter(product => product.id !== productId));
+          }
           Swal.fire({
-            title: "Deleted!",
+            title: "Server Response!",
             text: response.data.message,
             icon: "success"
           });

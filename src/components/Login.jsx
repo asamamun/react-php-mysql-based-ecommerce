@@ -7,9 +7,9 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await login(email, password); // Pass email and password to login function
+    login(email, password); // Pass email and password to login function
   };
 
   return (

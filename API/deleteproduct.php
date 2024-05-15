@@ -31,6 +31,7 @@ try {
     }
 } catch (\Throwable $th) {
     $response['status'] = false;
+    // $response['message'] = "Error deleting product: " . $th->getFile() . " on line " . $th->getLine();
     $response['message'] = "Error deleting product: " . $th->getMessage();
 }
             // Execute SQL statement

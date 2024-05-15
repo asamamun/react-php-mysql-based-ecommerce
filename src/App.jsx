@@ -7,6 +7,8 @@ import {Home} from './components/Home';
 import Registration from './components/Registration';
 import Login from './components/Login'; // Import the Login component
 import {Products} from './components/Products';
+import {Orders} from './components/Orders';
+import {OrderDetails} from './components/OrderDetails';
 import ProductDetails from './components/ProductDetails';
 import {Cart} from './components/Cart';
 import ProductAdd from './components/ProductAdd';
@@ -23,11 +25,14 @@ function App() {
       <Route path="/login" element={<Login />} /> {/* Render the Login component at /login */}
       <Route path="/products" element={<Products />} />
       <Route path="/add" element={<ProductAdd />} />
+      <Route path="/orders" element={<Orders />} />
+      <Route path="/orders/:orderId" element={<OrderDetails />} />
       <Route path="/placeorder" element={<PlaceOrder />} />
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/" element={<Home />} />
     </Routes>
+    
     </AuthWrapper>
   );
 }
