@@ -101,6 +101,7 @@ export const Products = () => {
               <img src={`${product.images}`} className="card-img-top" alt={product.name} />
               <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
+                {/* <h3>{product.images}</h3> */}
                 <p className="card-text">{product.description}</p>
                 <p className="card-text font-weight-bold">Price: ${product.price}</p>
                 <div className="d-flex justify-content-between align-items-center">
