@@ -14,9 +14,9 @@ console.log(authData);
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark" data-aos="fade-down">
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/">
+                <Link className="navbar-brand" to="/" data-aos="fade-right" data-aos-delay="100">
                     My App
                 </Link>
                 <button
@@ -27,50 +27,52 @@ console.log(authData);
                     aria-controls="navbarNav"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
+                    data-aos="fade-left"
+                    data-aos-delay="200"
                 >
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div className="collapse navbar-collapse" id="navbarNav" data-aos="fade-down" data-aos-delay="300">
                     <ul className="navbar-nav me-auto">
-                        <li className="nav-item">
+                        <li className="nav-item" data-aos="fade-down" data-aos-delay="400">
                             <Link className="nav-link" to="/">
                                 Home
                             </Link>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item" data-aos="fade-down" data-aos-delay="500">
                             <Link className="nav-link" to="/products">
                                 Products
                             </Link>
                         </li>
                         {authData?.user ? (
                             <>
-                                <li className="nav-item">
+                                <li className="nav-item" data-aos="fade-down" data-aos-delay="600">
                                     <Link className="nav-link" to="/cart">
                                         Cart
                                     </Link>
                                 </li>
                                 {
                                     authData?.user?.role === '2' && (
-                                        <li className="nav-item">
+                                        <li className="nav-item" data-aos="fade-down" data-aos-delay="700">
                                             <Link className="nav-link" to="/orders">
                                                 Orders
                                             </Link>
                                         </li>
                                     )
                                 }
-                                <li className="nav-item">
+                                <li className="nav-item" data-aos="fade-down" data-aos-delay="800">
                                     <button className="btn btn-link nav-link" onClick={handleLogout}>
                                         Logout
                                     </button>
                                 </li>
                             </>) :
                             <>
-                                <li className="nav-item">
+                                <li className="nav-item" data-aos="fade-down" data-aos-delay="600">
                                     <Link className="nav-link" to="/registration">
                                         Registration
                                     </Link>
                                 </li>
-                                <li className="nav-item">
+                                <li className="nav-item" data-aos="fade-down" data-aos-delay="700">
                                     <Link className="nav-link" to="/login">
                                         Login
                                     </Link>

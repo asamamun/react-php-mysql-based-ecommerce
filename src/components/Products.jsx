@@ -73,15 +73,15 @@ export const Products = () => {
     ? products.filter((product) => product.category_name === selectedCategory)
     : products;
     return authData.status && (
-        <div className="container">
+        <div className="container" data-aos="fade-up">
           {authData.user.role == '2' && (
-            <Link className="btn btn-outline-info" to="/add">
+            <Link className="btn btn-outline-info" to="/add" data-aos="fade-right" data-aos-delay="200">
                                 Add Product
                             </Link>
           )}
           
-      <h2 className="my-4">Products - {selectedCategory || 'All Categories'}</h2>
-      <div className="mb-3">
+      <h2 className="my-4" data-aos="fade-down">Products - {selectedCategory || 'All Categories'}</h2>
+      <div className="mb-3" data-aos="fade-up" data-aos-delay="300">
         <label htmlFor="category-filter" className="form-label">
           Filter by Category:
         </label>
@@ -95,16 +95,16 @@ export const Products = () => {
         </select>
       </div>
       <div className="row">
-        {filteredProducts.map((product) => (
-          <div className="col-md-4 mb-4" key={product.id}>
-            <div className="card">
-              <img src={`${product.images}`} className="card-img-top" alt={product.name} />
-              <div className="card-body">
-                <h5 className="card-title">{product.name}</h5>
+        {filteredProducts.map((product, index) => (
+          <div className="col-md-4 mb-4" key={product.id} data-aos="fade-up" data-aos-delay={index * 100}>
+            <div className="card h-100 shadow-sm" data-aos="zoom-in" data-aos-delay={index * 150}>
+              <img src={`${product.images}`} className="card-img-top" alt={product.name} data-aos="fade-in" data-aos-delay={index * 200} />
+              <div className="card-body d-flex flex-column">
+                <h5 className="card-title" data-aos="fade-up" data-aos-delay={index * 250}>{product.name}</h5>
                 {/* <h3>{product.images}</h3> */}
-                <p className="card-text">{product.description}</p>
-                <p className="card-text font-weight-bold">Price: ${product.price}</p>
-                <div className="d-flex justify-content-between align-items-center">
+                <p className="card-text flex-grow-1" data-aos="fade-up" data-aos-delay={index * 300}>{product.description}</p>
+                <p className="card-text font-weight-bold" data-aos="fade-up" data-aos-delay={index * 350}>Price: ${product.price}</p>
+                <div className="d-flex justify-content-between align-items-center mt-auto" data-aos="fade-up" data-aos-delay={index * 400}>
                   <Link to={`/product/${product.id}`} className="btn btn-primary">
                     Details
                   </Link>

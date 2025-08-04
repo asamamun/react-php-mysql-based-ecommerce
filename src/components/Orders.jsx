@@ -23,20 +23,20 @@ export const Orders = () => {
         console.log('API Response:', data);
 
         if (typeof data === 'object' && data !== null) {
-          const rows = Object.entries(data).map(([orderId, orderData]) => {
+          const rows = Object.entries(data).map(([orderId, orderData], index) => {
             // Map over the order object and create table rows
             return (
-              <tr key={orderId}>
-                <td>{orderId}</td>
-                <td>{orderData.user_id}</td>
-                <td>{orderData.total}</td>
-                <td>{orderData.discount}</td>
-                <td>{orderData.comment}</td>
-                <td>{orderData.payment}</td>
-                <td>{orderData.trxid}</td>
-                <td>{orderData.status}</td>
-                <td>
-                  <Link to={`/orders/${orderId}`}>Details</Link>
+              <tr key={orderId} data-aos="fade-up" data-aos-delay={index * 100}>
+                <td data-aos="fade-right" data-aos-delay={index * 100 + 100}>{orderId}</td>
+                <td data-aos="fade-up" data-aos-delay={index * 100 + 200}>{orderData.user_id}</td>
+                <td data-aos="fade-up" data-aos-delay={index * 100 + 300}>{orderData.total}</td>
+                <td data-aos="fade-up" data-aos-delay={index * 100 + 400}>{orderData.discount}</td>
+                <td data-aos="fade-up" data-aos-delay={index * 100 + 500}>{orderData.comment}</td>
+                <td data-aos="fade-up" data-aos-delay={index * 100 + 600}>{orderData.payment}</td>
+                <td data-aos="fade-up" data-aos-delay={index * 100 + 700}>{orderData.trxid}</td>
+                <td data-aos="fade-up" data-aos-delay={index * 100 + 800}>{orderData.status}</td>
+                <td data-aos="fade-left" data-aos-delay={index * 100 + 900}>
+                  <Link to={`/orders/${orderId}`} className="btn btn-sm btn-primary">Details</Link>
                 </td>
               </tr>
             );
@@ -55,28 +55,30 @@ export const Orders = () => {
   }, []);
 
   return (
-    <div className='container'>
+    <div className='container' data-aos="fade-up">
       <Helmet>
         <title>Orders</title>
         <meta name="description" content="Orders with helmet" />
       </Helmet>
-      <h1>Orders</h1>
-      <table className="table table-primary table-striped table-hover">
-        <thead>
-          <tr>
-            <th>Order Id</th>
-            <th>User Id</th>
-            <th>Grand Total</th>
-            <th>Discount</th>
-            <th>Comment</th>
-            <th>Payment Method</th>
-            <th>Trx ID</th>
-            <th>Status</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
+      <h1 data-aos="fade-down">Orders</h1>
+      <div className="table-responsive" data-aos="fade-up" data-aos-delay="200">
+        <table className="table table-primary table-striped table-hover">
+          <thead>
+            <tr>
+              <th data-aos="fade-right" data-aos-delay="300">Order Id</th>
+              <th data-aos="fade-right" data-aos-delay="400">User Id</th>
+              <th data-aos="fade-right" data-aos-delay="500">Grand Total</th>
+              <th data-aos="fade-right" data-aos-delay="600">Discount</th>
+              <th data-aos="fade-right" data-aos-delay="700">Comment</th>
+              <th data-aos="fade-right" data-aos-delay="800">Payment Method</th>
+              <th data-aos="fade-right" data-aos-delay="900">Trx ID</th>
+              <th data-aos="fade-right" data-aos-delay="1000">Status</th>
+              <th data-aos="fade-right" data-aos-delay="1100">Details</th>
+            </tr>
+          </thead>
+          <tbody>{rows}</tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -56,27 +56,28 @@ const Registration = ()=> {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" data-aos="fade-up">
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <h2 className="text-center mb-4">User Registration</h2>
+          <div className="card shadow-lg" data-aos="zoom-in" data-aos-delay="200">
+            <div className="card-header bg-success text-white" data-aos="fade-down" data-aos-delay="300">
+              <h2 className="text-center mb-0">User Registration</h2>
+            </div>
+            <div className="card-body p-4">
               <form onSubmit={handleSubmit}>
-
-                <div className="form-group  mt-2">
+                <div className="form-group mt-3" data-aos="fade-up" data-aos-delay="400">
                   <input type="text" placeholder="Username" className="form-control" id="username" name="username" value={formData.username} onChange={handleChange} required />
                 </div>
 
-                <div className="form-group  mt-2">
+                <div className="form-group mt-3" data-aos="fade-up" data-aos-delay="500">
                   <input type="email" placeholder="Email" className="form-control" id="email" name="email" value={formData.email} onChange={handleChange} required />
                 </div>
                 
-                <div className="form-group  mt-2">
+                <div className="form-group mt-3" data-aos="fade-up" data-aos-delay="600">
                   <input type="password" placeholder="Password" className="form-control" id="password" name="password" value={formData.password} onChange={handleChange} required />
                 </div>
 
-                <div className="form-group  mt-2">
+                <div className="form-group mt-3" data-aos="fade-up" data-aos-delay="700">
                   {/* <label htmlFor="role">Role:</label> */}
                   <select className="form-control" id="role" name="role" value={formData.role} onChange={handleChange} required>
                     <option value="2">Admin</option>
@@ -85,8 +86,8 @@ const Registration = ()=> {
                   </select>
                 </div>
 
-                <div className="form-group mt-2">
-                  <button type="submit" className="btn btn-primary btn-block">Register</button>
+                <div className="form-group mt-4" data-aos="fade-up" data-aos-delay="800">
+                  <button type="submit" className="btn btn-success w-100">Register</button>
                 </div>
 
               </form>

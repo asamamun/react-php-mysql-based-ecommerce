@@ -1,7 +1,6 @@
 // App.js
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { AuthWrapper } from './useAuth';
 import Navbar from './components/Navbar';
 import {Home} from './components/Home';
 import Registration from './components/Registration';
@@ -17,7 +16,7 @@ import PlaceOrder from './components/PlaceOrder';
 
 function App() {
   return (
-    <AuthWrapper>
+    <>
         <Navbar></Navbar>
         {/* <MyRoutes /> */}
         <Routes>
@@ -31,9 +30,8 @@ function App() {
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/" element={<Home />} />
-    </Routes>
-    
-    </AuthWrapper>
+    </Routes>    
+    </>
   );
 }
 
