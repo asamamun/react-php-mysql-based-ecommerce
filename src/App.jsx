@@ -12,6 +12,8 @@ import ProductDetails from './components/ProductDetails';
 import {Cart} from './components/Cart';
 import ProductAdd from './components/ProductAdd';
 import PlaceOrder from './components/PlaceOrder';
+import { MyOrders } from './components/MyOrders';
+
 
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
       <Route path="/add" element={<ProductAdd />} />
       <Route path="/orders" element={<Orders />} />
       <Route path="/orders/:orderId" element={<OrderDetails />} />
+      <Route path="/my-orders" element={<MyOrders />} />
       <Route path="/placeorder" element={<PlaceOrder />} />
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/cart" element={<Cart />} />

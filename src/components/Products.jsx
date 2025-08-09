@@ -19,6 +19,7 @@ export const Products = () => {
       try {
         const response = await fetch(`${API_URL}products.php`);
         const data = await response.json();
+        console.log(data);
         setProducts(data);
 
         // Get unique categories from the products data

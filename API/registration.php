@@ -13,24 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $usernameInput = $requestData['username'];
     $emailInput = $requestData['email'];
     $passwordInput = $requestData['password'];
-    $roleInput = $requestData['role'];
+    $roleInput = 3;
     
     // Hash the password (use a better hashing method in production)
     $hashedPassword = password_hash($passwordInput, PASSWORD_DEFAULT);
 
-    // Your database connection and insert query
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "web1ecomm";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    // Include database connection
+    require_once 'database.php';
 
     // Prepare and bind SQL statement
     $stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");

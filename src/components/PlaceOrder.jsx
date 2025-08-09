@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useCart } from './../CartContext';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import API_URL from './../config';

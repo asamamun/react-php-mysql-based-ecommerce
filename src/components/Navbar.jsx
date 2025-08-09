@@ -40,9 +40,11 @@ console.log(authData);
                             </Link>
                         </li>
                         <li className="nav-item" data-aos="fade-down" data-aos-delay="500">
+{authData?.user && (
                             <Link className="nav-link" to="/products">
                                 Products
                             </Link>
+                            )}
                         </li>
                         {authData?.user ? (
                             <>
@@ -60,6 +62,11 @@ console.log(authData);
                                         </li>
                                     )
                                 }
+                                <li className="nav-item" data-aos="fade-down" data-aos-delay="700">
+                                    <Link className="nav-link" to="/my-orders">
+                                        My Orders
+                                    </Link>
+                                </li>
                                 <li className="nav-item" data-aos="fade-down" data-aos-delay="800">
                                     <button className="btn btn-link nav-link" onClick={handleLogout}>
                                         Logout

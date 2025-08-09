@@ -1,17 +1,17 @@
-import React, { useState ,useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import { AuthContext } from './../AuthContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import API_URL from './../config';
 
-const Registration = ()=> {
-    const { authData } = useContext(AuthContext);
-    // console.log(authData)
+const Registration = () => {
+  const { authData } = useContext(AuthContext);
+  // console.log(authData)
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    role: '2' // Default role is '2' (Admin)
+    retypePassword: ''
   });
 
   const handleChange = (e) => {
@@ -24,7 +24,20 @@ const Registration = ()=> {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`${API_URL}registration.php`, formData)
+
+    // Check if passwords match
+    if (formData.password !== formData.retypePassword) {
+      Swal.fire({
+        title: 'Passwords do not match',
+        text: 'Please make sure both password fields are identical',
+        icon: 'error'
+      });
+      return;
+    }
+
+    // Remove retypePassword from data sent to API
+    const { retypePassword, ...registrationData } = formData;
+    axios.post(`${API_URL}registration.php`, registrationData)
       .then(response => {
         console.log(response.data);
         if (response.data.message === 'Registration successfully !!!') {
@@ -37,8 +50,16 @@ const Registration = ()=> {
             username: '',
             email: '',
             password: '',
-            role: '2'
+            retypePassword: '',
           });
+          //redirect to login
+          Swal.fire({
+            title: 'Registration Successfully Done !!',
+            icon: 'success'
+          }).then(() => {
+            window.location.href = '/login';
+          });
+
         } else {
           Swal.fire({
             title: 'Registration Failed',
@@ -72,18 +93,13 @@ const Registration = ()=> {
                 <div className="form-group mt-3" data-aos="fade-up" data-aos-delay="500">
                   <input type="email" placeholder="Email" className="form-control" id="email" name="email" value={formData.email} onChange={handleChange} required />
                 </div>
-                
+
                 <div className="form-group mt-3" data-aos="fade-up" data-aos-delay="600">
                   <input type="password" placeholder="Password" className="form-control" id="password" name="password" value={formData.password} onChange={handleChange} required />
                 </div>
 
                 <div className="form-group mt-3" data-aos="fade-up" data-aos-delay="700">
-                  {/* <label htmlFor="role">Role:</label> */}
-                  <select className="form-control" id="role" name="role" value={formData.role} onChange={handleChange} required>
-                    <option value="2">Admin</option>
-                    <option value="1">Moderator</option>
-                    <option value="3">User</option>
-                  </select>
+                  <input type="password" placeholder="Retype Password" className="form-control" id="retypePassword" name="retypePassword" value={formData.retypePassword} onChange={handleChange} required />
                 </div>
 
                 <div className="form-group mt-4" data-aos="fade-up" data-aos-delay="800">

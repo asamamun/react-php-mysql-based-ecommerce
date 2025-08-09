@@ -3,28 +3,34 @@ import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API_URL from './config';
 const AuthContext = createContext({
-  authData:localStorage.getItem('authData') || {
+  authData: localStorage.getItem('authData') || {
     'status': null,
     'message': null,
     'user': null,
   },
-  login: () => {} , // Modified login function
-  logout: () => {},
+  login: () => { }, // Modified login function
+  logout: () => { },
 });
 
 const AuthProvider = ({ value, children }) => {
-  const [authData, setAuthData] = useState({
-    'status': null,
-    'message': null,
-    'user': null,
-  });
-  const navigate = useNavigate(); // Initialize navigate
-  useEffect(() => {
+  // Initialize state with localStorage data if available
+  const [authData, setAuthData] = useState(() => {
     const storedAuthData = localStorage.getItem('authData');
     if (storedAuthData) {
-      setAuthData(JSON.parse(storedAuthData));
+      try {
+        return JSON.parse(storedAuthData);
+      } catch (error) {
+        console.error('Error parsing stored auth data:', error);
+        localStorage.removeItem('authData');
+      }
     }
-  }, []);
+    return {
+      'status': null,
+      'message': null,
+      'user': null,
+    };
+  });
+  const navigate = useNavigate(); // Initialize navigate
 
   const login = async (email, password) => {
     try {
@@ -35,22 +41,22 @@ const AuthProvider = ({ value, children }) => {
         },
         body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await response.json();
       setAuthData(data);
-      
+
       // Update local storage
       if (data && data.user) {
         localStorage.setItem('authData', JSON.stringify(data));
       } else {
         localStorage.removeItem('authData');
-      }      
+      }
       navigate('/'); // Navigate to home after successful login
     } catch (error) {
       console.error('Login error:', error);
     }
   };
-  
+
 
   const logout = () => {
     setAuthData({
@@ -60,11 +66,12 @@ const AuthProvider = ({ value, children }) => {
     });
     localStorage.removeItem('authData');
     navigate('/login'); // Navigate to home after successful login
-    
+
   };
 
+  // Update localStorage whenever authData changes
   useEffect(() => {
-    if (authData) {
+    if (authData && authData.user) {
       localStorage.setItem('authData', JSON.stringify(authData));
     } else {
       localStorage.removeItem('authData');

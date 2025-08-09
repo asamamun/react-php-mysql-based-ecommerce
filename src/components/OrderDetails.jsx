@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../AuthContext';
 
 import API_URL from './../config';
 
 export const OrderDetails = () => {
   const { orderId } = useParams();
   const [orderDetails, setOrderDetails] = useState(null);
+  const { authData } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -29,9 +31,15 @@ export const OrderDetails = () => {
   return (
     <div className="container mt-4" data-aos="fade-up">
         <div className="mb-4" data-aos="fade-down" data-aos-delay="200">
-          <Link to="/orders" className="btn btn-outline-info me-2">
-            <i className="fa fa-arrow-left me-2"></i> Back
-          </Link>
+          {authData?.user?.role === '2' ? (
+            <Link to="/orders" className="btn btn-outline-info me-2">
+              <i className="fa fa-arrow-left me-2"></i> Back to Orders
+            </Link>
+          ) : (
+            <Link to="/my-orders" className="btn btn-outline-info me-2">
+              <i className="fa fa-arrow-left me-2"></i> Back to My Orders
+            </Link>
+          )}
           <button className="btn btn-primary" onClick={() => window.print()}>
             <i className="bi bi-printer me-2"></i>Print
           </button>
