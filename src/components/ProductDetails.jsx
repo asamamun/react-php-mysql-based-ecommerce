@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import API_URL from './../config';
+import { useCart } from '../CartContext';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -55,7 +57,10 @@ const ProductDetails = () => {
                 
                 <div className="mt-4" data-aos="fade-up" data-aos-delay="900">
                   <h3 className="text-primary mb-3">Price: ${product.price}</h3>
-                  <button className="btn btn-success btn-lg me-2">
+                  <button 
+                    className="btn btn-success btn-lg me-2"
+                    onClick={() => addToCart(product)}
+                  >
                     <i className="fas fa-shopping-cart me-2"></i>Add to Cart
                   </button>
                   <button className="btn btn-outline-primary btn-lg">

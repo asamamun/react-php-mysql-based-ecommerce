@@ -3,9 +3,15 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 // import { AuthContext } from './AuthContext';
 import { AuthContext } from '../AuthContext';
+import { useCart } from '../CartContext';
 
 const Navbar = ()=> {
     const { authData, logout } = useContext(AuthContext);
+    const { cart } = useCart();
+    
+    // Calculate total items in cart
+    const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+    
 console.log(authData);
     const handleLogout = () => {
         console.log('Logout clicked');
@@ -48,9 +54,28 @@ console.log(authData);
                         </li>
                         {authData?.user ? (
                             <>
-                                <li className="nav-item" data-aos="fade-down" data-aos-delay="600">
+                                <li className="nav-item" data-aos="fade-down" data-aos-delay="600" style={{ position: 'relative' }}>
                                     <Link className="nav-link" to="/cart">
                                         Cart
+                                        {cartItemCount > 0 && (
+                                            <span 
+                                                className="badge bg-danger" 
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '0px',
+                                                    right: '-8px',
+                                                    fontSize: '0.75rem',
+                                                    minWidth: '18px',
+                                                    height: '18px',
+                                                    borderRadius: '50%',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center'
+                                                }}
+                                            >
+                                                {cartItemCount}
+                                            </span>
+                                        )}
                                     </Link>
                                 </li>
                                 {
